@@ -53,6 +53,10 @@ powerCurve <- function(
 
     ) {
     
+    if(substr(test, 1, 5) == 'fixed') {
+        if(cat(gsub("^fixed\\((.+)\\)$", "\\1", test)) %in% unique(names(fixef(fit))) == FALSE) stop("Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.")
+    }
+    
     opts <- simrOptions(...)
     on.exit(simrOptions(opts))
 

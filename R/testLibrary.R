@@ -162,9 +162,6 @@ fixeddesc <- function(text, xname) {
                 text <-  paste("Type-I",text)
             }
         }
-            
-        # If `fixed` effect not existent in `fit`, stop.
-        if(!xname %in% unique(names(fixef(fit)))) stop("Fixed effect not present in model.")
 
         # test used
         rval <- if(text=="default") defaultdesc(fit, xname) else text
@@ -204,6 +201,14 @@ defaulttest <- function(fit, xname) {
     )
 }
 
+
+xnameExists <- function(fit, xname) {
+    
+    # Does xname exist in the model? (TRUE/FALSE)
+    xname %in% unique(names(fixef(fit)))
+}
+
+
 checkInteractions <- function(fit, xname) {
 
     ts <- terms(fit)
@@ -213,6 +218,7 @@ checkInteractions <- function(fit, xname) {
 
     xname %in% unlist(str_split(label[order > 1], stringr::fixed(":")))
 }
+
 
 defaultdesc <- function(fit, xname) {
 
@@ -406,9 +412,6 @@ removeSquiggle <- function(x) {
 #     t-test for lm, not available for lmerMod
 
 ztest <- function(fit, xname) {
-    
-    # If `fixed` effect not existent in `fit`, stop.
-    if(!xname %in% unique(names(fixef(fit)))) stop("Fixed effect not present in model.")
 
     xname <- removeSquiggle(xname)
 

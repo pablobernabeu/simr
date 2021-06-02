@@ -202,13 +202,6 @@ defaulttest <- function(fit, xname) {
 }
 
 
-xnameExists <- function(fit, xname) {
-    
-    # Does xname exist in the model? (TRUE/FALSE)
-    xname %in% unique(names(fixef(fit)))
-}
-
-
 checkInteractions <- function(fit, xname) {
 
     ts <- terms(fit)
@@ -412,6 +405,8 @@ removeSquiggle <- function(x) {
 #     t-test for lm, not available for lmerMod
 
 ztest <- function(fit, xname) {
+    
+    if(xname %in% unique(names(fixef(fit))) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
 
     xname <- removeSquiggle(xname)
 
@@ -610,7 +605,7 @@ pbtest <- function(fit, xname) drop1test(fit, xname, pbWrap)
 
 satest <- function(fit, xname) {
     
-    if(xnameExists(xname, fit) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
+    if(xname %in% unique(names(fixef(fit))) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
 
     xname <- removeSquiggle(xname)
 

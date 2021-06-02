@@ -403,6 +403,9 @@ removeSquiggle <- function(x) {
 #     t-test for lm, not available for lmerMod
 
 ztest <- function(fit, xname) {
+    
+    # If `fixed` effect not existent in `fit`, stop.
+    if(!xname %in% unique(names(fixef(fit)))) stop("Fixed effect not present in model.")
 
     xname <- removeSquiggle(xname)
 

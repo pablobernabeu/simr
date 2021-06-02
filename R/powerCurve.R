@@ -52,9 +52,6 @@ powerCurve <- function(
     ...
 
     ) {
-    
-    # If `fixed` effect not existent in `fit`, stop.
-    if(!xname %in% unique(names(fixef(fit)))) stop("Fixed effect not present in model.")
 
     opts <- simrOptions(...)
     on.exit(simrOptions(opts))

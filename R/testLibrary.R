@@ -609,6 +609,8 @@ pbWrap <- function(object, objectDrop, ...) {
 pbtest <- function(fit, xname) drop1test(fit, xname, pbWrap)
 
 satest <- function(fit, xname) {
+    
+    if(xnameExists(xname, fit) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
 
     xname <- removeSquiggle(xname)
 

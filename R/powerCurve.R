@@ -53,8 +53,6 @@ powerCurve <- function(
 
     ) {
     
-    if(xnameExists==FALSE) stop("Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.")
-
     opts <- simrOptions(...)
     on.exit(simrOptions(opts))
 

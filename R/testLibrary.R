@@ -162,6 +162,9 @@ fixeddesc <- function(text, xname) {
                 text <-  paste("Type-I",text)
             }
         }
+            
+        # If `fixed` effect not existent in `fit`, stop.
+        if(!xname %in% unique(names(fixef(fit)))) stop("Fixed effect not present in model.")
 
         # test used
         rval <- if(text=="default") defaultdesc(fit, xname) else text

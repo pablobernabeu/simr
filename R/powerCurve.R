@@ -55,7 +55,9 @@ powerCurve <- function(
     
     # [Work in progress] If the test is `fixed`, and `xname` does not exist in the model, throw error.
     if(substr(test, 1, 5) == 'fixed') {
-        if(gsub("^fixed\\(.(.+).\\)$", "\\1", test) %in% unique(names(fixef(fit))) == FALSE) stop("Please double-check the name of the effect in the model, especially the order of the variables in interactions.")
+        if(gsub("^fixed\\(.(.+).\\)$", "\\1", test) %in% unique(names(fixef(fit))) == FALSE) {
+            stop("Please double-check the name of the effect in the model, especially the order of the variables in interactions.")
+            }
     }
     
     opts <- simrOptions(...)

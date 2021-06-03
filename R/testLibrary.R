@@ -406,8 +406,6 @@ removeSquiggle <- function(x) {
 
 ztest <- function(fit, xname) {
     
-    if(xname %in% unique(names(fixef(fit))) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
-
     xname <- removeSquiggle(xname)
 
     if(is_lmerTest(fit)) {
@@ -605,8 +603,6 @@ pbtest <- function(fit, xname) drop1test(fit, xname, pbWrap)
 
 satest <- function(fit, xname) {
     
-    if(xname %in% unique(names(fixef(fit))) == FALSE) stop('Please double-check the name of the effect in the model,\nespecially the order of the variables in interactions.')
-
     xname <- removeSquiggle(xname)
 
     a <- lmerTest_summary(fit, ddf="Satterthwaite")$coefficients
